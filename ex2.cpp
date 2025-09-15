@@ -24,7 +24,7 @@ int main() {
     bmi = weight / pow(height/100, 2);
 
     printf("Mr. %s, with only %d years old, your BMI is %.2f kg/m2.\n", name, age, bmi);
-
+    getchar();
     return 0;  
 
 }
