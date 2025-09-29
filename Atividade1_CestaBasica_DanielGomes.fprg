@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Atividade 1"/>
+        <attribute name="authors" value="gomes"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-09-28 11:28:20 "/>
+        <attribute name="created" value="Z29tZXM7Q0FWRVBDOzIwMjUtMDktMjg7IjA4OjAzOjE0ICI7MjE3Mg=="/>
+        <attribute name="edited" value="Z29tZXM7Q0FWRVBDOzIwMjUtMDktMjg7IjExOjI4OjIwICI7OTsyMjg2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="precoanterior, precoatual, variacao" type="Real" array="True" size="4"/>
+            <declare name="nomeproduto" type="String" array="True" size="4"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Ol&#225;! &quot;" newline="True"/>
+            <output expression="&quot;Para a an&#225;lise de pre&#231;os para os produtos da cesta b&#225;sica tenha em m&#227;os a lista com os nomes dos produtos, pre&#231;o anterior e pre&#231;o atual.&quot;" newline="True"/>
+            <for variable="i" start="0" end="3" direction="inc" step="1">
+                <output expression="&quot;Informe o produto: &quot;" newline="True"/>
+                <input variable="nomeproduto[i]"/>
+                <output expression="&quot;Digite o pre&#231;o anterior:&quot;" newline="True"/>
+                <input variable="precoanterior[i]"/>
+                <output expression="&quot;Digite o pre&#231;o atual:&quot;" newline="True"/>
+                <input variable="precoatual[i]"/>
+                <assign variable="variacao[i]" expression="calculatevariacao(precoanterior[i], precoatual[i])"/>
+            </for>
+            <output expression="&quot;----- Resumo de varia&#231;&#227;o de pre&#231;os -----&quot;" newline="True"/>
+            <for variable="i" start="0" end="3" direction="inc" step="1">
+                <output expression="&quot;Produto: &quot; &amp; nomeproduto[i]" newline="True"/>
+                <output expression="&quot;     Pre&#231;o anterior: R$&quot; &amp; toFixed(precoanterior[i],1)" newline="True"/>
+                <output expression="&quot;     Pre&#231;o atual: R$&quot; &amp; toFixed(precoatual[i],1)" newline="True"/>
+                <output expression="&quot;     Varia&#231;&#227;o = &quot; &amp; toFixed(variacao[i], 1) &amp; &quot;%&quot;" newline="True"/>
+                <output expression="&quot;     Situa&#231;&#227;o: &quot;" newline="False"/>
+                <if expression="variacao[i] == 0">
+                    <then>
+                        <output expression="&quot;Est&#225;vel&quot;" newline="True"/>
+                    </then>
+                    <else>
+                        <if expression="variacao[i] &gt; 0">
+                            <then>
+                                <if expression="variacao[i] &lt;= 10">
+                                    <then>
+                                        <output expression="&quot;Limite de aumento&quot;" newline="True"/>
+                                    </then>
+                                    <else>
+                                        <output expression="&quot;Aumento abusivo&quot;" newline="True"/>
+                                    </else>
+                                </if>
+                            </then>
+                            <else>
+                                <output expression="&quot;Redu&#231;&#227;o de pre&#231;o&quot;" newline="True"/>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+                <output expression="&quot;----------------------------------------&quot;" newline="True"/>
+            </for>
+            <output expression="&quot;Espero ter ajudado!&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="calculatevariacao" type="Real" variable="variacao">
+        <parameters>
+            <parameter name="anterior" type="Real" array="False"/>
+            <parameter name="atual" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="variacao" type="Real" array="False" size=""/>
+            <assign variable="variacao" expression="((atual&#160;- anterior)&#160;/&#160;anterior)&#160;*&#160;100"/>
+        </body>
+    </function>
+</flowgorithm>
