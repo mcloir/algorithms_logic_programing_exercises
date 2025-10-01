@@ -1,7 +1,2 @@
-Domingo Pedalada 120
-Domingo Corrida 30
-Terça-feira Corrida 130
-Terça-feira Corrida 15
-Terça-feira Polichinelos 12
-Sexta-feira Corrida 300
-Terça-feira Corrida 60
+Domingo Pedalada 120,000000
+Quarta-feira Corrida 60,000000
