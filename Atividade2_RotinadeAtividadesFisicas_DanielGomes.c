@@ -320,7 +320,7 @@ int main() {
                 printf("Selecione o modo de relatório:\n");
                 printf("    1 - Lista total de atividades\n");
                 printf("    2 - Sumarização de atividades por dia da semana\n");
-                printf("    3 - Top Day - Ranking de número de atividades e minutores por dia\n");
+                printf("    3 - Top Day\n");
 
                 scanf("%d", &modorelatorio);
                     if (modorelatorio < 1 || modorelatorio > 2) {
@@ -336,8 +336,8 @@ int main() {
                         printf("\n");
 
                         printf("1. Lista total de atividates:\n");
-                        while (fscanf(arquivo, "%s %s %d", diasemana, atividade, &duracaomin) == 3) {
-                            printf("%s: %s - %d minutos\n", diasemana, atividade, duracaomin);
+                        while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
+                            printf("%s: %s - %.0f minutos\n", diasemana, atividade, duracaomin);
                         }
                         fclose(arquivo);
 
@@ -387,7 +387,87 @@ int main() {
                         printf("Relatório semanal de atividades\n");
                         printf("-------------------------------\n");
                         printf("\n");
-                        printf("2. Sumarização de atividades por dia da semana:\n");
+                        printf("3. Top Day:\n");
+
+                        int minutos[7] = {0};
+                        for (i = 0; i < 7; i++) {
+                            contagem[i] = 0;
+                        }
+
+                        while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
+                            if (strstr(diasemana, "Domingo") != NULL) {contagem[0] ++; minutos[0] += duracaomin;
+                            } else if
+                        }
+                        
+-----------------------------------------------------------------------------------
+
+case 3:
+    printf("-------------------------------\n");
+    printf("Relatório semanal de atividades\n");
+    printf("-------------------------------\n");
+    printf("\n");
+
+    // Zerar contagem e minutos antes de ler o arquivo
+    int minutos[7] = {0};
+    for (i = 0; i < 7; i++) {
+        contagem[i] = 0;
+    }
+
+    // Ler cada linha do arquivo e acumular atividades + minutos
+    while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
+        if (strstr(diasemana, "Domingo") != NULL) {
+            contagem[0]++; minutos[0] += (int)duracaomin;
+        } else if (strstr(diasemana, "Segunda-feira") != NULL) {
+            contagem[1]++; minutos[1] += (int)duracaomin;
+        } else if (strstr(diasemana, "Terça-feira") != NULL) {
+            contagem[2]++; minutos[2] += (int)duracaomin;
+        } else if (strstr(diasemana, "Quarta-feira") != NULL) {
+            contagem[3]++; minutos[3] += (int)duracaomin;
+        } else if (strstr(diasemana, "Quinta-feira") != NULL) {
+            contagem[4]++; minutos[4] += (int)duracaomin;
+        } else if (strstr(diasemana, "Sexta-feira") != NULL) {
+            contagem[5]++; minutos[5] += (int)duracaomin;
+        } else if (strstr(diasemana, "Sábado") != NULL) {
+            contagem[6]++; minutos[6] += (int)duracaomin;
+        }
+    }
+
+    fclose(arquivo);
+
+    char *dias[7] = {
+        "Domingo", "Segunda-feira", "Terça-feira", 
+        "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"
+    };
+
+    // Encontrar top day em número de atividades
+    int maxAtividades = contagem[0], indiceAtiv = 0;
+    for (i = 1; i < 7; i++) {
+        if (contagem[i] > maxAtividades) {
+            maxAtividades = contagem[i];
+            indiceAtiv = i;
+        }
+    }
+
+    // Encontrar top day em minutos
+    int maxMinutos = minutos[0], indiceMin = 0;
+    for (i = 1; i < 7; i++) {
+        if (minutos[i] > maxMinutos) {
+            maxMinutos = minutos[i];
+            indiceMin = i;
+        }
+    }
+
+    printf("3. Top Day da Semana:\n");
+    printf("👉 Mais atividades: %s com %d atividades\n", dias[indiceAtiv], maxAtividades);
+    printf("👉 Mais minutos: %s com %d minutos\n", dias[indiceMin], maxMinutos);
+
+    printf("\nPressione Enter para continuar...");
+    getchar();
+    getchar();
+
+    break;
+
+________________________________________________
 
                         
 
