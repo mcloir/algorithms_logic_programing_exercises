@@ -1,10 +1,7 @@
-Segunda-feira 2 2
-Domingo 1 1
-Terça-feira 2 2
-Sábado 1 1
-Quarta-feira 1 1
-Quinta-feira 1 1
-Quinta-feira 2 2
-Sexta-feira 4 4
-Domingo 1 1
-Segunda-feira 1 1
+Domingo Pedalada 120
+Domingo Corrida 30
+Terça-feira Corrida 130
+Terça-feira Corrida 15
+Terça-feira Polichinelos 12
+Sexta-feira Corrida 300
+Terça-feira Corrida 60
