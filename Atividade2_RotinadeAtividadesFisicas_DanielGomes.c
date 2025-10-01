@@ -1,15 +1,17 @@
-#include <stdio.h>
-#include <locale.h>
-#include <stdlib.h>
+#include <stdio.h> //Biblioteca padrão de entrada e saída.
+#include <locale.h> //Biblioteca para possibilitar o uso de acentos.
 
 int main() {
     setlocale(LC_ALL, "pt_BR.UTF-8"); //Possibilita o uso de acentos para língua portuguesa.
 
+    //Declaração de variáveis.
     int escolha, gravacao, recomecar, contagem[7] = {0}, modorelatorio, i;
     float duracaomin, totalmin;
     char atividade[50], diasemana[15], linha[100];
-    FILE *arquivo;
 
+    FILE *arquivo; //Declaração do ponteiro para manipulação do arquivo.
+
+    //Cabeçalho do programa.
     printf("---------------------------------------------------------------------------\n");
     printf("                                MY WORKOUTS                                \n");
     printf("---------------------------------------------------------------------------\n");
@@ -27,7 +29,8 @@ int main() {
     printf("4 - Sair do programa\n");
     printf("\n");
 
-    scanf("%d", &escolha);
+    scanf("%d", &escolha); //Leitura da escolha do usuário para o menu principal.
+        //Laço para validar entrada do usuário.
         if (escolha < 1 || escolha > 4) {
             printf("Opção inválida! Tente novamente: \n");
         }
@@ -55,8 +58,7 @@ int main() {
                 switch (dia) {
                     case 1:
                         do {
-                            FILE *arquivo;
-                            arquivo = fopen("atividades.txt", "a");
+                            arquivo = fopen("atividades.txt", "a"); //Abreo o arquivo para registro de atividades.
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
                             return 1;
@@ -67,12 +69,12 @@ int main() {
                             printf("Qual a duração da atividade em minutos? ");
                             scanf("%f", &duracaomin);
 
-                            printf("Confirma a gravação dos dados?\n");
+                            printf("Confirma a gravação dos dados?\n"); //Confirmação de gravação para evitar erros de entrada de dados.
                             printf("    1 - Sim\n");
                             printf("    2 - Não\n");
                             scanf("%d", &gravacao);
 
-                            if (gravacao == 1) {
+                            if (gravacao == 1) {// Gravação de dados no arquivo.
                                 fprintf(arquivo, "Domingo %s %f\n", atividade, duracaomin);
                                 fclose(arquivo);
                                 printf("Gravação realizada com sucesso! \n");
@@ -81,17 +83,17 @@ int main() {
                                 printf ("Gravação cancelada! \n");
                             }
 
-                            printf("Deseja inserir mais atividades para este dia?\n");
+                            printf("Deseja inserir mais atividades para este dia?\n"); //Opção para inserir mais atividades no mesmo dia.
                             printf("    1 - Sim\n");
                             printf("    2 - Não\n");
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);// Fechamento do arquivo.
                         break;
                     
                     case 2:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -123,11 +125,11 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     case 3:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -159,11 +161,11 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     case 4:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -195,11 +197,11 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     case 5:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -231,11 +233,11 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     case 6:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -267,11 +269,11 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     case 7:
                         do {
-                            FILE *arquivo;
                             arquivo = fopen("atividades.txt", "a");
                             if (arquivo == NULL) {
                             printf("Erro ao abrir o arquivo!\n");
@@ -303,6 +305,7 @@ int main() {
                             scanf("%d", &recomecar);
 
                         } while (recomecar == 1);
+                            fclose(arquivo);
                         break;
 
                     default:
@@ -317,13 +320,13 @@ int main() {
                     return 1;
                 }
 
-                printf("Selecione o modo de relatório:\n");
-                printf("    1 - Lista total de atividades\n");
-                printf("    2 - Sumarização de atividades por dia da semana\n");
-                printf("    3 - Top Day\n");
+                printf("Selecione o modo de relatório:\n"); //Menu de seleção de modos de relatório.
+                printf("    1 - Lista total de atividades\n"); //Relatório que traz todas as atividades conforme registro, sem sumarização.
+                printf("    2 - Sumarização de atividades por dia da semana\n"); //Resumo de quantidade de atividades por dia da semana.
+                printf("    3 - Top Day\n"); //Relatório para identificar o dia com mais atividades e o dia com maior tempo de atividade física.
 
                 scanf("%d", &modorelatorio);
-                    if (modorelatorio < 1 || modorelatorio > 2) {
+                    if (modorelatorio < 1 || modorelatorio > 3) {
                         printf("Opção inválida! Tente novamente: \n");
                         scanf("%d", &modorelatorio);
                     }
@@ -335,7 +338,7 @@ int main() {
                         printf("-------------------------------\n");
                         printf("\n");
 
-                        printf("1. Lista total de atividates:\n");
+                        printf("1. Lista total de atividates:\n"); //Leitura dos dados contidos no arquivo.
                         while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
                             printf("%s: %s - %.0f minutos\n", diasemana, atividade, duracaomin);
                         }
@@ -354,6 +357,10 @@ int main() {
                         printf("-------------------------------\n");
                         printf("\n");
 
+                        for (i = 0; i < 7; i++) {
+                            contagem[i] = 0;
+                        }
+                        //Leitura dos dados contidos no arquivo e contagem de atividades por dia da semana.
                         while (fgets(linha, sizeof(linha), arquivo) != NULL) {
                         if (strstr(linha, "Domingo") != NULL) contagem[0]++;
                         else if (strstr(linha, "Segunda-feira") != NULL) contagem[1]++;
@@ -365,7 +372,8 @@ int main() {
                         }
                 
                         fclose(arquivo);
-
+                        
+                        //Exibição do resumo de atividades por dia da semana.
                         printf("2. Sumarização de atividades por dia da semana:\n");
                         printf("Domingo: %d atividades\n", contagem[0]);
                         printf("Segunda-feira: %d atividades\n", contagem[1]);
@@ -392,91 +400,63 @@ int main() {
                         int minutos[7] = {0};
                         for (i = 0; i < 7; i++) {
                             contagem[i] = 0;
+                            minutos[i] = 0;
                         }
 
+                        //Leitura dos dados contidos no arquivo, contagem de atividades e soma do tempo de atividade por dia da semana.
                         while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
-                            if (strstr(diasemana, "Domingo") != NULL) {contagem[0] ++; minutos[0] += duracaomin;
-                            } else if
+                            if (strstr(diasemana, "Domingo") != NULL)
+                                {contagem[0] ++; minutos[0] += duracaomin;
+                            } else if (strstr(diasemana, "Segunda-feira") != NULL) {
+                                contagem[1] ++; minutos[1] += duracaomin;
+                            } else if (strstr(diasemana, "Terça-feira") != NULL) {
+                                contagem[2] ++; minutos[2] += duracaomin;
+                            } else if (strstr(diasemana, "Quarta-feira") != NULL) {
+                                contagem[3] ++; minutos[3] += duracaomin;
+                            } else if (strstr(diasemana, "Quinta-feira") != NULL) {
+                                contagem[4] ++; minutos[4] += duracaomin;
+                            } else if (strstr(diasemana, "Sexta-feira") != NULL) {
+                                contagem[5] ++; minutos[5] += duracaomin;
+                            } else if (strstr(diasemana, "Sábado") != NULL) {
+                                contagem[6] ++; minutos[6] += duracaomin;
+                            }
                         }
-                        
------------------------------------------------------------------------------------
 
-case 3:
-    printf("-------------------------------\n");
-    printf("Relatório semanal de atividades\n");
-    printf("-------------------------------\n");
-    printf("\n");
+                        fclose(arquivo);
 
-    // Zerar contagem e minutos antes de ler o arquivo
-    int minutos[7] = {0};
-    for (i = 0; i < 7; i++) {
-        contagem[i] = 0;
-    }
+                        char *dias[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
 
-    // Ler cada linha do arquivo e acumular atividades + minutos
-    while (fscanf(arquivo, "%s %s %f", diasemana, atividade, &duracaomin) == 3) {
-        if (strstr(diasemana, "Domingo") != NULL) {
-            contagem[0]++; minutos[0] += (int)duracaomin;
-        } else if (strstr(diasemana, "Segunda-feira") != NULL) {
-            contagem[1]++; minutos[1] += (int)duracaomin;
-        } else if (strstr(diasemana, "Terça-feira") != NULL) {
-            contagem[2]++; minutos[2] += (int)duracaomin;
-        } else if (strstr(diasemana, "Quarta-feira") != NULL) {
-            contagem[3]++; minutos[3] += (int)duracaomin;
-        } else if (strstr(diasemana, "Quinta-feira") != NULL) {
-            contagem[4]++; minutos[4] += (int)duracaomin;
-        } else if (strstr(diasemana, "Sexta-feira") != NULL) {
-            contagem[5]++; minutos[5] += (int)duracaomin;
-        } else if (strstr(diasemana, "Sábado") != NULL) {
-            contagem[6]++; minutos[6] += (int)duracaomin;
-        }
-    }
+                        //Identificação do dia com mais atividades e do dia com maior tempo de atividade física.
+                        int maxatividades = contagem[0], indiceativ = 0;
+                        for (i = 1; i < 7; i++) {
+                            if (contagem[i] > maxatividades) {
+                                maxatividades = contagem[i];
+                                indiceativ = i;
+                            }
+                        }
 
-    fclose(arquivo);
+                        //Identificação do dia com maior tempo de atividade física.
+                        int maxminutos = minutos[0], indicemin = 0;
+                        for (i = 1; i < 7; i++) {
+                            if (minutos[i] > maxminutos) {
+                                maxminutos = minutos [i];
+                                indicemin = i;
+                            }
+                        }
 
-    char *dias[7] = {
-        "Domingo", "Segunda-feira", "Terça-feira", 
-        "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"
-    };
+                        printf("Dia com mais atividades: %s com %d atividades\n", dias[indiceativ], maxatividades);
+                        printf("Dia com maior tempo em atividade: %s com %d minutos\n", dias[indicemin], maxminutos);
 
-    // Encontrar top day em número de atividades
-    int maxAtividades = contagem[0], indiceAtiv = 0;
-    for (i = 1; i < 7; i++) {
-        if (contagem[i] > maxAtividades) {
-            maxAtividades = contagem[i];
-            indiceAtiv = i;
-        }
-    }
-
-    // Encontrar top day em minutos
-    int maxMinutos = minutos[0], indiceMin = 0;
-    for (i = 1; i < 7; i++) {
-        if (minutos[i] > maxMinutos) {
-            maxMinutos = minutos[i];
-            indiceMin = i;
-        }
-    }
-
-    printf("3. Top Day da Semana:\n");
-    printf("👉 Mais atividades: %s com %d atividades\n", dias[indiceAtiv], maxAtividades);
-    printf("👉 Mais minutos: %s com %d minutos\n", dias[indiceMin], maxMinutos);
-
-    printf("\nPressione Enter para continuar...");
-    getchar();
-    getchar();
-
-    break;
-
-________________________________________________
-
-                        
-
+                        printf("\n");
+                        printf("Pressione Enter para continuar...");
+                        getchar();
+                        getchar();
 
                         break;
 
                 }
                 break;
-            case 3: //Apagar dados.
+            case 3: //Apagar dados. A ideia é que o usuário possa zerar os registros a cada nova semana.
                 printf("Tem certeza que deseja apagar todos os dados?\n");
                 printf("    1 - Sim\n");
                 printf("    2 - Não\n");
